@@ -813,66 +813,66 @@ ACSden=xx[1]
 ACSnum=xx[2:nx]
 rACS=mean(sd^2)/mean(sdw^2)
 
-xx=dataxChina[,2]
-nxChina=length(xx)-1
-x=xx-min(xx)
-nx=length(x)
-r=max(x)-min(x)
-a=1
-e=18
-mu=dataChinaH[a:e,2]
-beta=dataChinaH[a:e,3]
-se=dataChinaH[a:e,4]
-tau=dataChinaH[a:e,5]
-ll=-dataChinaH[a:e,6]/2
-f=as.character(dataChinaH[a:e,9])
-weight=dataChinaH[a:e, 7]
-output=cbind(f, ll, weight, mu, tau, beta, se)
-out=subset(output, weight>0)
-f=out[,1]
-ll=as.numeric(out[,2])
-wt=as.numeric(out[,3])
-wt=matrix(wt)
-mu=as.numeric(out[,4])
-tau=as.numeric(out[,5])
-beta=as.numeric(out[,6])
-se=as.numeric(out[,7])
-wt=exp((ll-max(ll)))/sum(exp(((ll-max(ll)))))
-wt=matrix(wt)
-nf=length(f)
-T=matrix(0, nx, nf)
-sd=matrix(0, nx, 1)
-sdw=matrix(0, nx, 1)
-sdb=matrix(0, nx, 1)
-rmean=matrix(0, nx, 1)
-meanrisk=matrix(0, nx, 1)
-var=matrix(0,nx,nf)
-varw=matrix(0,nx,nf)
-varb=matrix(0,nx,nf)
-upcl<-matrix(0, nx, 1)
-lowcl<-matrix(0, nx, 1)
-for (i in 1:nx) {
-for (k in 1:nf) {
-if (f[k]== "z*logit"){
-    		T[i,k]<-x[i]/(1+exp(-(x[i]-mu[k])/(tau[k]*r)))
-  	}
-  	if (f[k] == "log(z)*logit"){
-    		T[i,k]<-log(x[i]+1)/(1+exp(-(x[i]-mu[k])/(tau[k]*r)))
-  	}
-}}
-for (i in 1:nx) {rmean[i]=(T[i,]*beta)%*%wt}
-for (k in 1:nf) { for (i in 1:nx) {
-var[i,k]=(T[i,k]*se[k])^2 + (T[i,k]*beta[k]-rmean[i])^2 
-varw[i,k]=(T[i,k]*se[k])^2 
-varb[i,k]=(T[i,k]*beta[k]-rmean[i])^2 }} 
-for (i in 1:nx) {
-sd[i]=sqrt(var[i,])%*%wt
-sdw[i]=sqrt(varw[i,])%*%wt
-sdb[i]=sqrt(varb[i,])%*%wt
-}
-MChinaH=rmean[2:nx]
-varH=sd^2
-rChinaH=mean(sd^2)/mean(sdw^2)
+# xx=dataxChina[,2]
+# nxChina=length(xx)-1
+# x=xx-min(xx)
+# nx=length(x)
+# r=max(x)-min(x)
+# a=1
+# e=18
+# mu=dataChinaH[a:e,2]
+# beta=dataChinaH[a:e,3]
+# se=dataChinaH[a:e,4]
+# tau=dataChinaH[a:e,5]
+# ll=-dataChinaH[a:e,6]/2
+# f=as.character(dataChinaH[a:e,9])
+# weight=dataChinaH[a:e, 7]
+# output=cbind(f, ll, weight, mu, tau, beta, se)
+# out=subset(output, weight>0)
+# f=out[,1]
+# ll=as.numeric(out[,2])
+# wt=as.numeric(out[,3])
+# wt=matrix(wt)
+# mu=as.numeric(out[,4])
+# tau=as.numeric(out[,5])
+# beta=as.numeric(out[,6])
+# se=as.numeric(out[,7])
+# wt=exp((ll-max(ll)))/sum(exp(((ll-max(ll)))))
+# wt=matrix(wt)
+# nf=length(f)
+# T=matrix(0, nx, nf)
+# sd=matrix(0, nx, 1)
+# sdw=matrix(0, nx, 1)
+# sdb=matrix(0, nx, 1)
+# rmean=matrix(0, nx, 1)
+# meanrisk=matrix(0, nx, 1)
+# var=matrix(0,nx,nf)
+# varw=matrix(0,nx,nf)
+# varb=matrix(0,nx,nf)
+# upcl<-matrix(0, nx, 1)
+# lowcl<-matrix(0, nx, 1)
+# for (i in 1:nx) {
+# for (k in 1:nf) {
+# if (f[k]== "z*logit"){
+#     		T[i,k]<-x[i]/(1+exp(-(x[i]-mu[k])/(tau[k]*r)))
+#   	}
+#   	if (f[k] == "log(z)*logit"){
+#     		T[i,k]<-log(x[i]+1)/(1+exp(-(x[i]-mu[k])/(tau[k]*r)))
+#   	}
+# }}
+# for (i in 1:nx) {rmean[i]=(T[i,]*beta)%*%wt}
+# for (k in 1:nf) { for (i in 1:nx) {
+# var[i,k]=(T[i,k]*se[k])^2 + (T[i,k]*beta[k]-rmean[i])^2 
+# varw[i,k]=(T[i,k]*se[k])^2 
+# varb[i,k]=(T[i,k]*beta[k]-rmean[i])^2 }} 
+# for (i in 1:nx) {
+# sd[i]=sqrt(var[i,])%*%wt
+# sdw[i]=sqrt(varw[i,])%*%wt
+# sdb[i]=sqrt(varb[i,])%*%wt
+# }
+# MChinaH=rmean[2:nx]
+# varH=sd^2
+# rChinaH=mean(sd^2)/mean(sdw^2)
 
 xx=dataxChina[,2]
 nxChina=length(xx)-1
@@ -947,8 +947,10 @@ Chinaden=xx[1]
 Chinanum=xx[2:nx]
 rChinaL=mean(sd^2)/mean(sdw^2)
 
-MChina=(MChinaH+MChinaL)/2
-rChina=(rChinaH+rChinaL)/2
+# MChina=(MChinaH+MChinaL)/2
+# rChina=(rChinaH+rChinaL)/2
+MChina=MChinaL
+rChina=rChinaL
 
 xx=dataxNHS[,2]
 nxNHS=length(xx)-1
