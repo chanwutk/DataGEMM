@@ -107,7 +107,7 @@ varb=matrix(0,nx,nf)
 upcl<-matrix(0, nx, 1)
 lowcl<-matrix(0, nx, 1)
 for (i in 1:nx) {
-for (k in 1:nf) {
+if(nf >= 1) for (k in 1:nf) {
 if (f[k]== "z*logit"){
     		T[i,k]<-x[i]/(1+exp(-(x[i]-mu[k])/(tau[k]*r)))
   	}
@@ -116,7 +116,7 @@ if (f[k]== "z*logit"){
   	}
 }}
 for (i in 1:nx) {rmean[i]=(T[i,]*beta)%*%wt}
-for (k in 1:nf) { for (i in 1:nx) {
+if(nf >= 1) for (k in 1:nf) { for (i in 1:nx) {
 var[i,k]=(T[i,k]*se[k])^2 + (T[i,k]*beta[k]-rmean[i])^2 
 varw[i,k]=(T[i,k]*se[k])^2 
 varb[i,k]=(T[i,k]*beta[k]-rmean[i])^2 }} 
@@ -174,7 +174,7 @@ varb=matrix(0,nx,nf)
 upcl<-matrix(0, nx, 1)
 lowcl<-matrix(0, nx, 1)
 for (i in 1:nx) {
-for (k in 1:nf) {
+if(nf >= 1) for (k in 1:nf) {
 if (f[k]== "z*logit"){
     		T[i,k]<-x[i]/(1+exp(-(x[i]-mu[k])/(tau[k]*r)))
   	}
@@ -183,7 +183,7 @@ if (f[k]== "z*logit"){
   	}
 }}
 for (i in 1:nx) {rmean[i]=(T[i,]*beta)%*%wt}
-for (k in 1:nf) { for (i in 1:nx) {
+if(nf >= 1) for (k in 1:nf) { for (i in 1:nx) {
 var[i,k]=(T[i,k]*se[k])^2 + (T[i,k]*beta[k]-rmean[i])^2 
 varw[i,k]=(T[i,k]*se[k])^2 
 varb[i,k]=(T[i,k]*beta[k]-rmean[i])^2 }} 
@@ -243,7 +243,7 @@ varb=matrix(0,nx,nf)
 upcl<-matrix(0, nx, 1)
 lowcl<-matrix(0, nx, 1)
 for (i in 1:nx) {
-for (k in 1:nf) {
+if(nf >= 1) for (k in 1:nf) {
 if (f[k]== "z*logit"){
     		T[i,k]<-x[i]/(1+exp(-(x[i]-mu[k])/(tau[k]*r)))
   	}
@@ -252,7 +252,7 @@ if (f[k]== "z*logit"){
   	}
 }}
 for (i in 1:nx) {rmean[i]=(T[i,]*beta)%*%wt}
-for (k in 1:nf) { for (i in 1:nx) {
+if(nf >= 1) for (k in 1:nf) { for (i in 1:nx) {
 var[i,k]=(T[i,k]*se[k])^2 + (T[i,k]*beta[k]-rmean[i])^2 
 varw[i,k]=(T[i,k]*se[k])^2 
 varb[i,k]=(T[i,k]*beta[k]-rmean[i])^2 }} 
@@ -311,7 +311,7 @@ varb=matrix(0,nx,nf)
 upcl<-matrix(0, nx, 1)
 lowcl<-matrix(0, nx, 1)
 for (i in 1:nx) {
-for (k in 1:nf) {
+if(nf >= 1) for (k in 1:nf) {
 if (f[k]== "z*logit"){
     		T[i,k]<-x[i]/(1+exp(-(x[i]-mu[k])/(tau[k]*r)))
   	}
@@ -320,7 +320,7 @@ if (f[k]== "z*logit"){
   	}
 }}
 for (i in 1:nx) {rmean[i]=(T[i,]*beta)%*%wt}
-for (k in 1:nf) { for (i in 1:nx) {
+if(nf >= 1) for (k in 1:nf) { for (i in 1:nx) {
 var[i,k]=(T[i,k]*se[k])^2 + (T[i,k]*beta[k]-rmean[i])^2 
 varw[i,k]=(T[i,k]*se[k])^2 
 varb[i,k]=(T[i,k]*beta[k]-rmean[i])^2 }} 
@@ -378,7 +378,7 @@ varb=matrix(0,nx,nf)
 upcl<-matrix(0, nx, 1)
 lowcl<-matrix(0, nx, 1)
 for (i in 1:nx) {
-for (k in 1:nf) {
+if(nf >= 1) for (k in 1:nf) {
 if (f[k]== "z*logit"){
     		T[i,k]<-x[i]/(1+exp(-(x[i]-mu[k])/(tau[k]*r)))
   	}
@@ -387,7 +387,7 @@ if (f[k]== "z*logit"){
   	}
 }}
 for (i in 1:nx) {rmean[i]=(T[i,]*beta)%*%wt}
-for (k in 1:nf) { for (i in 1:nx) {
+if(nf >= 1) for (k in 1:nf) { for (i in 1:nx) {
 var[i,k]=(T[i,k]*se[k])^2 + (T[i,k]*beta[k]-rmean[i])^2 
 varw[i,k]=(T[i,k]*se[k])^2 
 varb[i,k]=(T[i,k]*beta[k]-rmean[i])^2 }} 
@@ -447,7 +447,7 @@ varb=matrix(0,nx,nf)
 upcl<-matrix(0, nx, 1)
 lowcl<-matrix(0, nx, 1)
 for (i in 1:nx) {
-for (k in 1:nf) {
+if(nf >= 1) for (k in 1:nf) {
 if (f[k]== "z*logit"){
     		T[i,k]<-x[i]/(1+exp(-(x[i]-mu[k])/(tau[k]*r)))
   	}
@@ -456,7 +456,7 @@ if (f[k]== "z*logit"){
   	}
 }}
 for (i in 1:nx) {rmean[i]=(T[i,]*beta)%*%wt}
-for (k in 1:nf) { for (i in 1:nx) {
+if(nf >= 1) for (k in 1:nf) { for (i in 1:nx) {
 var[i,k]=(T[i,k]*se[k])^2 + (T[i,k]*beta[k]-rmean[i])^2 
 varw[i,k]=(T[i,k]*se[k])^2 
 varb[i,k]=(T[i,k]*beta[k]-rmean[i])^2 }} 
@@ -513,7 +513,7 @@ varb=matrix(0,nx,nf)
 upcl<-matrix(0, nx, 1)
 lowcl<-matrix(0, nx, 1)
 for (i in 1:nx) {
-for (k in 1:nf) {
+if(nf >= 1) for (k in 1:nf) {
 if (f[k]== "linear"){
     		T[i,k]<-x[i]/(1+exp(-(x[i]-mu[k])/(tau[k]*r)))
   	}
@@ -522,7 +522,7 @@ if (f[k]== "linear"){
   	}
 }}
 for (i in 1:nx) {rmean[i]=(T[i,]*beta)%*%wt}
-for (k in 1:nf) { for (i in 1:nx) {
+if(nf >= 1) for (k in 1:nf) { for (i in 1:nx) {
 var[i,k]=(T[i,k]*se[k])^2 + (T[i,k]*beta[k]-rmean[i])^2 
 varw[i,k]=(T[i,k]*se[k])^2 
 varb[i,k]=(T[i,k]*beta[k]-rmean[i])^2 }} 
@@ -581,7 +581,7 @@ varb=matrix(0,nx,nf)
 upcl<-matrix(0, nx, 1)
 lowcl<-matrix(0, nx, 1)
 for (i in 1:nx) {
-for (k in 1:nf) {
+if(nf >= 1) for (k in 1:nf) {
 if (f[k]== "z*logit"){
     		T[i,k]<-x[i]/(1+exp(-(x[i]-mu[k])/(tau[k]*r)))
   	}
@@ -590,7 +590,7 @@ if (f[k]== "z*logit"){
   	}
 }}
 for (i in 1:nx) {rmean[i]=(T[i,]*beta)%*%wt}
-for (k in 1:nf) { for (i in 1:nx) {
+if(nf >= 1) for (k in 1:nf) { for (i in 1:nx) {
 var[i,k]=(T[i,k]*se[k])^2 + (T[i,k]*beta[k]-rmean[i])^2 
 varw[i,k]=(T[i,k]*se[k])^2 
 varb[i,k]=(T[i,k]*beta[k]-rmean[i])^2 }} 
@@ -648,7 +648,7 @@ varb=matrix(0,nx,nf)
 upcl<-matrix(0, nx, 1)
 lowcl<-matrix(0, nx, 1)
 for (i in 1:nx) {
-for (k in 1:nf) {
+if(nf >= 1) for (k in 1:nf) {
 if (f[k]== "linear"){
     		T[i,k]<-x[i]/(1+exp(-(x[i]-mu[k])/(tau[k]*r)))
   	}
@@ -657,7 +657,7 @@ if (f[k]== "linear"){
   	}
 }}
 for (i in 1:nx) {rmean[i]=(T[i,]*beta)%*%wt}
-for (k in 1:nf) { for (i in 1:nx) {
+if(nf >= 1) for (k in 1:nf) { for (i in 1:nx) {
 var[i,k]=(T[i,k]*se[k])^2 + (T[i,k]*beta[k]-rmean[i])^2 
 varw[i,k]=(T[i,k]*se[k])^2 
 varb[i,k]=(T[i,k]*beta[k]-rmean[i])^2 }} 
@@ -716,7 +716,7 @@ varb=matrix(0,nx,nf)
 upcl<-matrix(0, nx, 1)
 lowcl<-matrix(0, nx, 1)
 for (i in 1:nx) {
-for (k in 1:nf) {
+if(nf >= 1) for (k in 1:nf) {
 if (f[k]== "z*logit"){
     		T[i,k]<-x[i]/(1+exp(-(x[i]-mu[k])/(tau[k]*r)))
   	}
@@ -725,7 +725,7 @@ if (f[k]== "z*logit"){
   	}
 }}
 for (i in 1:nx) {rmean[i]=(T[i,]*beta)%*%wt}
-for (k in 1:nf) { for (i in 1:nx) {
+if(nf >= 1) for (k in 1:nf) { for (i in 1:nx) {
 var[i,k]=(T[i,k]*se[k])^2 + (T[i,k]*beta[k]-rmean[i])^2 
 varw[i,k]=(T[i,k]*se[k])^2 
 varb[i,k]=(T[i,k]*beta[k]-rmean[i])^2 }} 
@@ -785,7 +785,7 @@ varb=matrix(0,nx,nf)
 upcl<-matrix(0, nx, 1)
 lowcl<-matrix(0, nx, 1)
 for (i in 1:nx) {
-for (k in 1:nf) {
+if(nf >= 1) for (k in 1:nf) {
 if (f[k]== "z*logit"){
     		T[i,k]<-x[i]/(1+exp(-(x[i]-mu[k])/(tau[k]*r)))
   	}
@@ -794,7 +794,7 @@ if (f[k]== "z*logit"){
   	}
 }}
 for (i in 1:nx) {rmean[i]=(T[i,]*beta)%*%wt}
-for (k in 1:nf) { for (i in 1:nx) {
+if(nf >= 1) for (k in 1:nf) { for (i in 1:nx) {
 var[i,k]=(T[i,k]*se[k])^2 + (T[i,k]*beta[k]-rmean[i])^2 
 varw[i,k]=(T[i,k]*se[k])^2 
 varb[i,k]=(T[i,k]*beta[k]-rmean[i])^2 }} 
@@ -852,7 +852,7 @@ rACS=mean(sd^2)/mean(sdw^2)
 # upcl<-matrix(0, nx, 1)
 # lowcl<-matrix(0, nx, 1)
 # for (i in 1:nx) {
-# for (k in 1:nf) {
+# if(nf >= 1) for (k in 1:nf) {
 # if (f[k]== "z*logit"){
 #     		T[i,k]<-x[i]/(1+exp(-(x[i]-mu[k])/(tau[k]*r)))
 #   	}
@@ -861,7 +861,7 @@ rACS=mean(sd^2)/mean(sdw^2)
 #   	}
 # }}
 # for (i in 1:nx) {rmean[i]=(T[i,]*beta)%*%wt}
-# for (k in 1:nf) { for (i in 1:nx) {
+# if(nf >= 1) for (k in 1:nf) { for (i in 1:nx) {
 # var[i,k]=(T[i,k]*se[k])^2 + (T[i,k]*beta[k]-rmean[i])^2 
 # varw[i,k]=(T[i,k]*se[k])^2 
 # varb[i,k]=(T[i,k]*beta[k]-rmean[i])^2 }} 
@@ -913,7 +913,7 @@ varb=matrix(0,nx,nf)
 upcl<-matrix(0, nx, 1)
 lowcl<-matrix(0, nx, 1)
 for (i in 1:nx) {
-for (k in 1:nf) {
+if(nf >= 1) for (k in 1:nf) {
 if (f[k]== "z*logit"){
     		T[i,k]<-x[i]/(1+exp(-(x[i]-mu[k])/(tau[k]*r)))
   	}
@@ -922,7 +922,7 @@ if (f[k]== "z*logit"){
   	}
 }}
 for (i in 1:nx) {rmean[i]=(T[i,]*beta)%*%wt}
-for (k in 1:nf) { for (i in 1:nx) {
+if(nf >= 1) for (k in 1:nf) { for (i in 1:nx) {
 var[i,k]=(T[i,k]*se[k])^2 + (T[i,k]*beta[k]-rmean[i])^2 
 varw[i,k]=(T[i,k]*se[k])^2 
 varb[i,k]=(T[i,k]*beta[k]-rmean[i])^2 }} 
@@ -991,7 +991,7 @@ varb=matrix(0,nx,nf)
 upcl<-matrix(0, nx, 1)
 lowcl<-matrix(0, nx, 1)
 for (i in 1:nx) {
-for (k in 1:nf) {
+if(nf >= 1) for (k in 1:nf) {
 if (f[k]== "z*logit"){
     		T[i,k]<-x[i]/(1+exp(-(x[i]-mu[k])/(tau[k]*r)))
   	}
@@ -1000,7 +1000,7 @@ if (f[k]== "z*logit"){
   	}
 }}
 for (i in 1:nx) {rmean[i]=(T[i,]*beta)%*%wt}
-for (k in 1:nf) { for (i in 1:nx) {
+if(nf >= 1) for (k in 1:nf) { for (i in 1:nx) {
 var[i,k]=(T[i,k]*se[k])^2 + (T[i,k]*beta[k]-rmean[i])^2 
 varw[i,k]=(T[i,k]*se[k])^2 
 varb[i,k]=(T[i,k]*beta[k]-rmean[i])^2 }} 
@@ -1058,7 +1058,7 @@ varb=matrix(0,nx,nf)
 upcl<-matrix(0, nx, 1)
 lowcl<-matrix(0, nx, 1)
 for (i in 1:nx) {
-for (k in 1:nf) {
+if(nf >= 1) for (k in 1:nf) {
 if (f[k]== "z*logit"){
     		T[i,k]<-x[i]/(1+exp(-(x[i]-mu[k])/(tau[k]*r)))
   	}
@@ -1067,7 +1067,7 @@ if (f[k]== "z*logit"){
   	}
 }}
 for (i in 1:nx) {rmean[i]=(T[i,]*beta)%*%wt}
-for (k in 1:nf) { for (i in 1:nx) {
+if(nf >= 1) for (k in 1:nf) { for (i in 1:nx) {
 var[i,k]=(T[i,k]*se[k])^2 + (T[i,k]*beta[k]-rmean[i])^2 
 varw[i,k]=(T[i,k]*se[k])^2 
 varb[i,k]=(T[i,k]*beta[k]-rmean[i])^2 }} 
@@ -1125,7 +1125,7 @@ varb=matrix(0,nx,nf)
 upcl<-matrix(0, nx, 1)
 lowcl<-matrix(0, nx, 1)
 for (i in 1:nx) {
-for (k in 1:nf) {
+if(nf >= 1) for (k in 1:nf) {
 if (f[k]== "linear"){
     		T[i,k]<-x[i]/(1+exp(-(x[i]-mu[k])/(tau[k]*r)))
   	}
@@ -1134,7 +1134,7 @@ if (f[k]== "linear"){
   	}
 }}
 for (i in 1:nx) {rmean[i]=(T[i,]*beta)%*%wt}
-for (k in 1:nf) { for (i in 1:nx) {
+if(nf >= 1) for (k in 1:nf) { for (i in 1:nx) {
 var[i,k]=(T[i,k]*se[k])^2 + (T[i,k]*beta[k]-rmean[i])^2 
 varw[i,k]=(T[i,k]*se[k])^2 
 varb[i,k]=(T[i,k]*beta[k]-rmean[i])^2 }} 
