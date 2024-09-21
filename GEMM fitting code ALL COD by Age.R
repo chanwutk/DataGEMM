@@ -11,48 +11,48 @@ bb=1
 #results file gives model parameter estimates and weights
 # ap_exp file gives concentrations for RR prediction
 
-setwd ("C:/GEMM files")
-dataACS<- read.csv("ACS results.csv", header = T)
-dataxACS= read.csv("ACS ap_exp.csv", header = T)
-dataRome<- read.csv("Rome results.csv ", header = T)
-dataxRome= read.csv("Rome ap.exp.csv ", header = T)
-dataChinaH<- read.csv("China results.csv ", header=T)
-dataChinaL<- read.csv("China IND COVARIATES results.csv ", header=T)
-dataxChina= read.csv("China ap_exp.csv", header = T)
-dataHK<- read.csv("Hong Konk results.csv", header = T)
-dataxHK= read.csv("Hong Kong ap_exp.csv", header = T)
-dataUK<- read.csv("England results.csv", header = T)
-dataxUK= read.csv("England ap_exp.csv", header = T)
-dataCCHS<- read.csv("CCHS results.csv", header = T)
-dataxCCHS<- read.csv("CCHS ap_exp.csv", header = T)
-dataAARP<- read.csv("AARP results.csv", header = T)
-dataxAARP= read.csv("AARP ap_exp.csv", header = T)
-dataCanCHEC2001<- read.csv("CanCHEC 2001 results.csv", header = T)
-dataxCanCHEC2001= read.csv("CanCHEC 2001 ap_exp.csv", header = T)
-dataBreast<- read.csv("Breast results.csv", header = T)
-dataxBreast<- read.csv("Breast ap_exp.csv", header = T)
-dataNHS<- read.csv("NHS results.csv", header = T)
-dataxNHS<- read.csv("NHS ap_exp.csv", header = T)
-dataNHIS<- read.csv("NHIS results.csv", header = T)
-dataxNHIS<- read.csv("NHIS ap_exp.csv", header = T)
-dataCanCHEC1991<- read.csv("CanCHEC1991 results.csv", header = T)
-dataxCanCHEC1991<- read.csv("CanCHEC1991 ap_exp.csv", header = T)
-dataCTS<- read.csv("CTS results.csv", header = T)
-dataxCTS<- read.csv("CTS ap_exp.csv", header = T)
-dataVHM<- read.csv("VHM&PP results.csv", header = T)
-dataxVHM<- read.csv("VHM&PP ap_exp.csv", header = T)
+# setwd ("C:/GEMM files")
+dataACS<- read.csv("ACS results.csv", header = TRUE)
+dataxACS= read.csv("ACS ap_exp.csv", header = TRUE)
+dataRome<- read.csv("Rome results.csv", header = TRUE)
+dataxRome= read.csv("Rome_ap.exp.csv", header = TRUE)
+dataChinaH<- read.csv("China IND + CONT results.csv", header = TRUE)
+dataChinaL<- read.csv("China IND COVARIATES results.csv", header = TRUE)
+dataxChina= read.csv("China ap_exp.csv", header = TRUE)
+dataHK<- read.csv("Hong Konk results.csv", header = TRUE)
+dataxHK= read.csv("Hong Kong ap_exp.csv", header = TRUE)
+dataUK<- read.csv("England results.csv", header = TRUE)
+dataxUK= read.csv("England ap.exp.csv", header = TRUE)
+dataCCHS<- read.csv("CCHS results.csv", header = TRUE)
+dataxCCHS<- read.csv("CCHS ap_exp.csv", header = TRUE)
+dataAARP<- read.csv("AARP results.csv", header = TRUE)
+dataxAARP= read.csv("AARP ap.exp.csv", header = TRUE)
+dataCanCHEC2001<- read.csv("CanCHEC 2001 results.csv", header = TRUE)
+dataxCanCHEC2001= read.csv("CanCHEC 2001 ap_exp.csv", header = TRUE)
+dataBreast<- read.csv("Breast results.csv", header = TRUE)
+dataxBreast<- read.csv("Breast ap_exp.csv", header = TRUE)
+dataNHS<- read.csv("NHS results.csv", header = TRUE)
+dataxNHS<- read.csv("NHS ap_exp.csv", header = TRUE)
+dataNHIS<- read.csv("NHIS results.csv", header = TRUE)
+dataxNHIS<- read.csv("NHIS ap_exp.csv", header = TRUE)
+dataCanCHEC1991<- read.csv("CanCHEC1991 results.csv", header = TRUE)
+dataxCanCHEC1991<- read.csv("CanCHEC1991 ap_exp.csv", header = TRUE)
+dataCTS<- read.csv("CTS results.csv", header = TRUE)
+dataxCTS<- read.csv("CTS ap_exp.csv", header = TRUE)
+dataVHM<- read.csv("VHM&PP results.csv", header = TRUE)
+dataxVHM<- read.csv("VHM&PP ap_exp.csv", header = TRUE)
 dataDUELS <- read.csv(file = "DUELS results.csv", head=TRUE, sep=";", na.strings=c("."))
 dataxDUELS <- read.csv(file = "DUELS ap_exp.csv", head=TRUE, sep=";", na.strings=c("."))
 
 
 #read in HR and CI for 18 ESCAPE cohorts not including VHM&PP cohort
-dataESC<- read.csv("ESCAPE logHR se without VHM&PP.csv ", header = T)
+dataESC<- read.csv("ESCAPE logHR se without VHM&PP.csv", header = TRUE)
 
 #read in HR and CI for other cohorts
-dataREST<- read.csv("HR CI Rest of World.csv ", header = T)
+dataREST<- read.csv("HR CI Rest of World.csv", header = TRUE)
 
 #read in cohort specific mortality rates for 5 GBD COD and all non-accidental by age group
-rate<- read.csv("Mortality Rates by Cohort Age 80 plus.csv", header = T)
+rate<- read.csv("Mortality Rates by Cohort Age 80 plus.csv", header = TRUE)
 #set age as midpoint in 5 year age inteval
 age=85
 perc= rate[1:41,4]/100
@@ -131,7 +131,7 @@ varb=matrix(0,nx,nf)
 upcl<-matrix(0, nx, 1)
 lowcl<-matrix(0, nx, 1)
 for (i in 1:nx) {
-for (k in 1:nf) {
+if (nf >= 1) for (k in 1:nf) {
 if (f[k]== "z*logit"){
     		T[i,k]<-x[i]/(1+exp(-(x[i]-mu[k])/(tau[k]*r)))
   	}
@@ -140,7 +140,7 @@ if (f[k]== "z*logit"){
   	}
 }}
 for (i in 1:nx) {rmean[i]=(T[i,]*beta)%*%wt}
-for (k in 1:nf) { for (i in 1:nx) {
+if (nf >= 1) for (k in 1:nf) { for (i in 1:nx) {
 var[i,k]=(T[i,k]*se[k])^2 + (T[i,k]*beta[k]-rmean[i])^2 
 varw[i,k]=(T[i,k]*se[k])^2 
 varb[i,k]=(T[i,k]*beta[k]-rmean[i])^2 }} 
@@ -202,7 +202,7 @@ varb=matrix(0,nx,nf)
 upcl<-matrix(0, nx, 1)
 lowcl<-matrix(0, nx, 1)
 for (i in 1:nx) {
-for (k in 1:nf) {
+if (nf >= 1) for (k in 1:nf) {
 if (f[k]== "z*logit"){
     		T[i,k]<-x[i]/(1+exp(-(x[i]-mu[k])/(tau[k]*r)))
   	}
@@ -211,7 +211,7 @@ if (f[k]== "z*logit"){
   	}
 }}
 for (i in 1:nx) {rmean[i]=(T[i,]*beta)%*%wt}
-for (k in 1:nf) { for (i in 1:nx) {
+if (nf >= 1) for (k in 1:nf) { for (i in 1:nx) {
 var[i,k]=(T[i,k]*se[k])^2 + (T[i,k]*beta[k]-rmean[i])^2 
 varw[i,k]=(T[i,k]*se[k])^2 
 varb[i,k]=(T[i,k]*beta[k]-rmean[i])^2 }} 
@@ -274,7 +274,7 @@ varb=matrix(0,nx,nf)
 upcl<-matrix(0, nx, 1)
 lowcl<-matrix(0, nx, 1)
 for (i in 1:nx) {
-for (k in 1:nf) {
+if (nf >= 1) for (k in 1:nf) {
 if (f[k]== "z*logit"){
     		T[i,k]<-x[i]/(1+exp(-(x[i]-mu[k])/(tau[k]*r)))
   	}
@@ -283,7 +283,7 @@ if (f[k]== "z*logit"){
   	}
 }}
 for (i in 1:nx) {rmean[i]=(T[i,]*beta)%*%wt}
-for (k in 1:nf) { for (i in 1:nx) {
+if (nf >= 1) for (k in 1:nf) { for (i in 1:nx) {
 var[i,k]=(T[i,k]*se[k])^2 + (T[i,k]*beta[k]-rmean[i])^2 
 varw[i,k]=(T[i,k]*se[k])^2 
 varb[i,k]=(T[i,k]*beta[k]-rmean[i])^2 }} 
@@ -346,7 +346,7 @@ varb=matrix(0,nx,nf)
 upcl<-matrix(0, nx, 1)
 lowcl<-matrix(0, nx, 1)
 for (i in 1:nx) {
-for (k in 1:nf) {
+if (nf >= 1) for (k in 1:nf) {
 if (f[k]== "z*logit"){
     		T[i,k]<-x[i]/(1+exp(-(x[i]-mu[k])/(tau[k]*r)))
   	}
@@ -355,7 +355,7 @@ if (f[k]== "z*logit"){
   	}
 }}
 for (i in 1:nx) {rmean[i]=(T[i,]*beta)%*%wt}
-for (k in 1:nf) { for (i in 1:nx) {
+if (nf >= 1) for (k in 1:nf) { for (i in 1:nx) {
 var[i,k]=(T[i,k]*se[k])^2 + (T[i,k]*beta[k]-rmean[i])^2 
 varw[i,k]=(T[i,k]*se[k])^2 
 varb[i,k]=(T[i,k]*beta[k]-rmean[i])^2 }} 
@@ -417,7 +417,7 @@ varb=matrix(0,nx,nf)
 upcl<-matrix(0, nx, 1)
 lowcl<-matrix(0, nx, 1)
 for (i in 1:nx) {
-for (k in 1:nf) {
+if (nf >= 1) for (k in 1:nf) {
 if (f[k]== "z*logit"){
     		T[i,k]<-x[i]/(1+exp(-(x[i]-mu[k])/(tau[k]*r)))
   	}
@@ -426,7 +426,7 @@ if (f[k]== "z*logit"){
   	}
 }}
 for (i in 1:nx) {rmean[i]=(T[i,]*beta)%*%wt}
-for (k in 1:nf) { for (i in 1:nx) {
+if (nf >= 1) for (k in 1:nf) { for (i in 1:nx) {
 var[i,k]=(T[i,k]*se[k])^2 + (T[i,k]*beta[k]-rmean[i])^2 
 varw[i,k]=(T[i,k]*se[k])^2 
 varb[i,k]=(T[i,k]*beta[k]-rmean[i])^2 }} 
@@ -490,7 +490,7 @@ varb=matrix(0,nx,nf)
 upcl<-matrix(0, nx, 1)
 lowcl<-matrix(0, nx, 1)
 for (i in 1:nx) {
-for (k in 1:nf) {
+if (nf >= 1) for (k in 1:nf) {
 if (f[k]== "z*logit"){
     		T[i,k]<-x[i]/(1+exp(-(x[i]-mu[k])/(tau[k]*r)))
   	}
@@ -499,7 +499,7 @@ if (f[k]== "z*logit"){
   	}
 }}
 for (i in 1:nx) {rmean[i]=(T[i,]*beta)%*%wt}
-for (k in 1:nf) { for (i in 1:nx) {
+if (nf >= 1) for (k in 1:nf) { for (i in 1:nx) {
 var[i,k]=(T[i,k]*se[k])^2 + (T[i,k]*beta[k]-rmean[i])^2 
 varw[i,k]=(T[i,k]*se[k])^2 
 varb[i,k]=(T[i,k]*beta[k]-rmean[i])^2 }} 
@@ -560,7 +560,7 @@ varb=matrix(0,nx,nf)
 upcl<-matrix(0, nx, 1)
 lowcl<-matrix(0, nx, 1)
 for (i in 1:nx) {
-for (k in 1:nf) {
+if (nf >= 1) for (k in 1:nf) {
 if (f[k]== "linear"){
     		T[i,k]<-x[i]/(1+exp(-(x[i]-mu[k])/(tau[k]*r)))
   	}
@@ -569,7 +569,7 @@ if (f[k]== "linear"){
   	}
 }}
 for (i in 1:nx) {rmean[i]=(T[i,]*beta)%*%wt}
-for (k in 1:nf) { for (i in 1:nx) {
+if (nf >= 1) for (k in 1:nf) { for (i in 1:nx) {
 var[i,k]=(T[i,k]*se[k])^2 + (T[i,k]*beta[k]-rmean[i])^2 
 varw[i,k]=(T[i,k]*se[k])^2 
 varb[i,k]=(T[i,k]*beta[k]-rmean[i])^2 }} 
@@ -632,7 +632,7 @@ varb=matrix(0,nx,nf)
 upcl<-matrix(0, nx, 1)
 lowcl<-matrix(0, nx, 1)
 for (i in 1:nx) {
-for (k in 1:nf) {
+if (nf >= 1) for (k in 1:nf) {
 if (f[k]== "z*logit"){
     		T[i,k]<-x[i]/(1+exp(-(x[i]-mu[k])/(tau[k]*r)))
   	}
@@ -641,7 +641,7 @@ if (f[k]== "z*logit"){
   	}
 }}
 for (i in 1:nx) {rmean[i]=(T[i,]*beta)%*%wt}
-for (k in 1:nf) { for (i in 1:nx) {
+if (nf >= 1) for (k in 1:nf) { for (i in 1:nx) {
 var[i,k]=(T[i,k]*se[k])^2 + (T[i,k]*beta[k]-rmean[i])^2 
 varw[i,k]=(T[i,k]*se[k])^2 
 varb[i,k]=(T[i,k]*beta[k]-rmean[i])^2 }} 
@@ -703,7 +703,7 @@ varb=matrix(0,nx,nf)
 upcl<-matrix(0, nx, 1)
 lowcl<-matrix(0, nx, 1)
 for (i in 1:nx) {
-for (k in 1:nf) {
+if (nf >= 1) for (k in 1:nf) {
 if (f[k]== "linear"){
     		T[i,k]<-x[i]/(1+exp(-(x[i]-mu[k])/(tau[k]*r)))
   	}
@@ -712,7 +712,7 @@ if (f[k]== "linear"){
   	}
 }}
 for (i in 1:nx) {rmean[i]=(T[i,]*beta)%*%wt}
-for (k in 1:nf) { for (i in 1:nx) {
+if (nf >= 1) for (k in 1:nf) { for (i in 1:nx) {
 var[i,k]=(T[i,k]*se[k])^2 + (T[i,k]*beta[k]-rmean[i])^2 
 varw[i,k]=(T[i,k]*se[k])^2 
 varb[i,k]=(T[i,k]*beta[k]-rmean[i])^2 }} 
@@ -775,7 +775,7 @@ varb=matrix(0,nx,nf)
 upcl<-matrix(0, nx, 1)
 lowcl<-matrix(0, nx, 1)
 for (i in 1:nx) {
-for (k in 1:nf) {
+if (nf >= 1) for (k in 1:nf) {
 if (f[k]== "z*logit"){
     		T[i,k]<-x[i]/(1+exp(-(x[i]-mu[k])/(tau[k]*r)))
   	}
@@ -784,7 +784,7 @@ if (f[k]== "z*logit"){
   	}
 }}
 for (i in 1:nx) {rmean[i]=(T[i,]*beta)%*%wt}
-for (k in 1:nf) { for (i in 1:nx) {
+if (nf >= 1) for (k in 1:nf) { for (i in 1:nx) {
 var[i,k]=(T[i,k]*se[k])^2 + (T[i,k]*beta[k]-rmean[i])^2 
 varw[i,k]=(T[i,k]*se[k])^2 
 varb[i,k]=(T[i,k]*beta[k]-rmean[i])^2 }} 
@@ -848,7 +848,7 @@ varb=matrix(0,nx,nf)
 upcl<-matrix(0, nx, 1)
 lowcl<-matrix(0, nx, 1)
 for (i in 1:nx) {
-for (k in 1:nf) {
+if (nf >= 1) for (k in 1:nf) {
 if (f[k]== "z*logit"){
     		T[i,k]<-x[i]/(1+exp(-(x[i]-mu[k])/(tau[k]*r)))
   	}
@@ -857,7 +857,7 @@ if (f[k]== "z*logit"){
   	}
 }}
 for (i in 1:nx) {rmean[i]=(T[i,]*beta)%*%wt}
-for (k in 1:nf) { for (i in 1:nx) {
+if (nf >= 1) for (k in 1:nf) { for (i in 1:nx) {
 var[i,k]=(T[i,k]*se[k])^2 + (T[i,k]*beta[k]-rmean[i])^2 
 varw[i,k]=(T[i,k]*se[k])^2 
 varb[i,k]=(T[i,k]*beta[k]-rmean[i])^2 }} 
@@ -919,7 +919,7 @@ varb=matrix(0,nx,nf)
 upcl<-matrix(0, nx, 1)
 lowcl<-matrix(0, nx, 1)
 for (i in 1:nx) {
-for (k in 1:nf) {
+if (nf >= 1) for (k in 1:nf) {
 if (f[k]== "z*logit"){
     		T[i,k]<-x[i]/(1+exp(-(x[i]-mu[k])/(tau[k]*r)))
   	}
@@ -928,7 +928,7 @@ if (f[k]== "z*logit"){
   	}
 }}
 for (i in 1:nx) {rmean[i]=(T[i,]*beta)%*%wt}
-for (k in 1:nf) { for (i in 1:nx) {
+if (nf >= 1) for (k in 1:nf) { for (i in 1:nx) {
 var[i,k]=(T[i,k]*se[k])^2 + (T[i,k]*beta[k]-rmean[i])^2 
 varw[i,k]=(T[i,k]*se[k])^2 
 varb[i,k]=(T[i,k]*beta[k]-rmean[i])^2 }} 
@@ -980,7 +980,7 @@ varb=matrix(0,nx,nf)
 upcl<-matrix(0, nx, 1)
 lowcl<-matrix(0, nx, 1)
 for (i in 1:nx) {
-for (k in 1:nf) {
+if (nf >= 1) for (k in 1:nf) {
 if (f[k]== "z*logit"){
     		T[i,k]<-x[i]/(1+exp(-(x[i]-mu[k])/(tau[k]*r)))
   	}
@@ -989,7 +989,7 @@ if (f[k]== "z*logit"){
   	}
 }}
 for (i in 1:nx) {rmean[i]=(T[i,]*beta)%*%wt}
-for (k in 1:nf) { for (i in 1:nx) {
+if (nf >= 1) for (k in 1:nf) { for (i in 1:nx) {
 var[i,k]=(T[i,k]*se[k])^2 + (T[i,k]*beta[k]-rmean[i])^2 
 varw[i,k]=(T[i,k]*se[k])^2 
 varb[i,k]=(T[i,k]*beta[k]-rmean[i])^2 }} 
@@ -1061,7 +1061,7 @@ varb=matrix(0,nx,nf)
 upcl<-matrix(0, nx, 1)
 lowcl<-matrix(0, nx, 1)
 for (i in 1:nx) {
-for (k in 1:nf) {
+if (nf >= 1) for (k in 1:nf) {
 if (f[k]== "z*logit"){
     		T[i,k]<-x[i]/(1+exp(-(x[i]-mu[k])/(tau[k]*r)))
   	}
@@ -1070,7 +1070,7 @@ if (f[k]== "z*logit"){
   	}
 }}
 for (i in 1:nx) {rmean[i]=(T[i,]*beta)%*%wt}
-for (k in 1:nf) { for (i in 1:nx) {
+if (nf >= 1) for (k in 1:nf) { for (i in 1:nx) {
 var[i,k]=(T[i,k]*se[k])^2 + (T[i,k]*beta[k]-rmean[i])^2 
 varw[i,k]=(T[i,k]*se[k])^2 
 varb[i,k]=(T[i,k]*beta[k]-rmean[i])^2 }} 
@@ -1132,7 +1132,7 @@ varb=matrix(0,nx,nf)
 upcl<-matrix(0, nx, 1)
 lowcl<-matrix(0, nx, 1)
 for (i in 1:nx) {
-for (k in 1:nf) {
+if (nf >= 1) for (k in 1:nf) {
 if (f[k]== "z*logit"){
     		T[i,k]<-x[i]/(1+exp(-(x[i]-mu[k])/(tau[k]*r)))
   	}
@@ -1141,7 +1141,7 @@ if (f[k]== "z*logit"){
   	}
 }}
 for (i in 1:nx) {rmean[i]=(T[i,]*beta)%*%wt}
-for (k in 1:nf) { for (i in 1:nx) {
+if (nf >= 1) for (k in 1:nf) { for (i in 1:nx) {
 var[i,k]=(T[i,k]*se[k])^2 + (T[i,k]*beta[k]-rmean[i])^2 
 varw[i,k]=(T[i,k]*se[k])^2 
 varb[i,k]=(T[i,k]*beta[k]-rmean[i])^2 }} 
@@ -1203,7 +1203,7 @@ varb=matrix(0,nx,nf)
 upcl<-matrix(0, nx, 1)
 lowcl<-matrix(0, nx, 1)
 for (i in 1:nx) {
-for (k in 1:nf) {
+if (nf >= 1) for (k in 1:nf) {
 if (f[k]== "linear"){
     		T[i,k]<-x[i]/(1+exp(-(x[i]-mu[k])/(tau[k]*r)))
   	}
@@ -1212,7 +1212,7 @@ if (f[k]== "linear"){
   	}
 }}
 for (i in 1:nx) {rmean[i]=(T[i,]*beta)%*%wt}
-for (k in 1:nf) { for (i in 1:nx) {
+if (nf >= 1) for (k in 1:nf) { for (i in 1:nx) {
 var[i,k]=(T[i,k]*se[k])^2 + (T[i,k]*beta[k]-rmean[i])^2 
 varw[i,k]=(T[i,k]*se[k])^2 
 varb[i,k]=(T[i,k]*beta[k]-rmean[i])^2 }} 
