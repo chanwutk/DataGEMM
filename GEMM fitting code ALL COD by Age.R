@@ -41,7 +41,7 @@ dataCTS<- read.csv("CTS results.csv", header = TRUE)
 dataxCTS<- read.csv("CTS ap_exp.csv", header = TRUE)
 dataVHM<- read.csv("VHM&PP results.csv", header = TRUE)
 dataxVHM<- read.csv("VHM&PP ap_exp.csv", header = TRUE)
-dataDUELS <- read.csv(file = "DUELS results.csv", head=TRUE, sep=";", na.strings=c("."))
+dataDUELS <- read.csv(file = "DUELS results.csv", head=TRUE, na.strings=c("."))
 dataxDUELS <- read.csv(file = "DUELS ap_exp.csv", head=TRUE, sep=";", na.strings=c("."))
 
 
@@ -104,8 +104,8 @@ beta=dataDUELS[a:e,3]
 se=dataDUELS[a:e,4]
 tau=dataDUELS[a:e,5]
 #ll=-dataDUELS[a:e,6]/2
-f=as.character(dataDUELS[a:e,9])
-weight=dataDUELS[a:e, 7]
+f=as.character(dataDUELS[a:e,7])
+weight=dataDUELS[a:e, 6]
 output=cbind(f, weight, mu, tau, beta, se)
 out=subset(output, weight>0)
 f=out[,1]
