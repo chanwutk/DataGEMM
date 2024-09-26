@@ -1,0 +1,10 @@
+services:
+  data-gemm:
+    build: .
+    container_name: DataGEMM
+    tty: true
+    environment:
+      - TERM=xterm-256color
+    volumes:
+      - .:/workspace
+    network_mode: "host"

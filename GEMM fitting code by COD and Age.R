@@ -3,8 +3,8 @@ library(MASS)
 library(metafor)
 library(minpack.lm)
 
-setwd ("C:/GBD")
-data<- read.csv("GBD2015 input_dataset with Pn and China Ensemble error.csv ", header = T)
+# setwd ("C:/GBD")
+data<- read.csv("GBD2015 input_dataset with Pn and China Ensemble error.csv", header = TRUE)
 
 
 cause=as.character(data[,3])

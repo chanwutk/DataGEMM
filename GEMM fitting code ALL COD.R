@@ -10,45 +10,45 @@ library(metafor)
 #results file gives model parameter estimates and weights
 # ap_exp file gives concentrations for RR prediction
 
-setwd ("C:/GEMM files")
-dataACS<- read.csv("ACS results.csv", header = T)
-dataxACS= read.csv("ACS ap_exp.csv", header = T)
-dataRome<- read.csv("Rome results.csv ", header = T)
-dataxRome= read.csv("Rome ap.exp.csv ", header = T)
-dataChinaH<- read.csv("China results.csv ", header=T)
-dataChinaL<- read.csv("China IND COVARIATES results.csv ", header=T)
-dataxChina= read.csv("China ap_exp.csv", header = T)
-dataHK<- read.csv("Hong Konk results.csv", header = T)
-dataxHK= read.csv("Hong Kong ap_exp.csv", header = T)
-dataUK<- read.csv("England results.csv", header = T)
-dataxUK= read.csv("England ap_exp.csv", header = T)
-dataCCHS<- read.csv("CCHS results.csv", header = T)
-dataxCCHS<- read.csv("CCHS ap_exp.csv", header = T)
-dataAARP<- read.csv("AARP results.csv", header = T)
-dataxAARP= read.csv("AARP ap_exp.csv", header = T)
-dataCanCHEC2001<- read.csv("CanCHEC 2001 results.csv", header = T)
-dataxCanCHEC2001= read.csv("CanCHEC 2001 ap_exp.csv", header = T)
-dataBreast<- read.csv("Breast results.csv", header = T)
-dataxBreast<- read.csv("Breast ap_exp.csv", header = T)
-dataNHS<- read.csv("NHS results.csv", header = T)
-dataxNHS<- read.csv("NHS ap_exp.csv", header = T)
-dataNHIS<- read.csv("NHIS results.csv", header = T)
-dataxNHIS<- read.csv("NHIS ap_exp.csv", header = T)
-dataCanCHEC1991<- read.csv("CanCHEC1991 results.csv", header = T)
-dataxCanCHEC1991<- read.csv("CanCHEC1991 ap_exp.csv", header = T)
-dataCTS<- read.csv("CTS results.csv", header = T)
-dataxCTS<- read.csv("CTS ap_exp.csv", header = T)
-dataVHM<- read.csv("VHM&PP results.csv", header = T)
-dataxVHM<- read.csv("VHM&PP ap_exp.csv", header = T)
-dataDUELS <- read.csv(file = "DUELS results.csv", head=TRUE, sep=";", na.strings=c("."))
+# setwd ("C:/GEMM files")
+dataACS<- read.csv("ACS results.csv", header = TRUE)
+dataxACS= read.csv("ACS ap_exp.csv", header = TRUE)
+dataRome<- read.csv("Rome results.csv", header = TRUE)
+dataxRome= read.csv("Rome_ap.exp.csv", header = TRUE)
+dataChinaH<- read.csv("China IND + CONT results.csv", header = TRUE)
+dataChinaL<- read.csv("China IND COVARIATES results.csv", header = TRUE)
+dataxChina= read.csv("China ap_exp.csv", header = TRUE)
+dataHK<- read.csv("Hong Konk results.csv", header = TRUE)
+dataxHK= read.csv("Hong Kong ap_exp.csv", header = TRUE)
+dataUK<- read.csv("England results.csv", header = TRUE)
+dataxUK= read.csv("England ap.exp.csv", header = TRUE)
+dataCCHS<- read.csv("CCHS results.csv", header = TRUE)
+dataxCCHS<- read.csv("CCHS ap_exp.csv", header = TRUE)
+dataAARP<- read.csv("AARP results.csv", header = TRUE)
+dataxAARP= read.csv("AARP ap.exp.csv", header = TRUE)
+dataCanCHEC2001<- read.csv("CanCHEC 2001 results.csv", header = TRUE)
+dataxCanCHEC2001= read.csv("CanCHEC 2001 ap_exp.csv", header = TRUE)
+dataBreast<- read.csv("Breast results.csv", header = TRUE)
+dataxBreast<- read.csv("Breast ap_exp.csv", header = TRUE)
+dataNHS<- read.csv("NHS results.csv", header = TRUE)
+dataxNHS<- read.csv("NHS ap_exp.csv", header = TRUE)
+dataNHIS<- read.csv("NHIS results.csv", header = TRUE)
+dataxNHIS<- read.csv("NHIS ap_exp.csv", header = TRUE)
+dataCanCHEC1991<- read.csv("CanCHEC1991 results.csv", header = TRUE)
+dataxCanCHEC1991<- read.csv("CanCHEC1991 ap_exp.csv", header = TRUE)
+dataCTS<- read.csv("CTS results.csv", header = TRUE)
+dataxCTS<- read.csv("CTS ap_exp.csv", header = TRUE)
+dataVHM<- read.csv("VHM&PP results.csv", header = TRUE)
+dataxVHM<- read.csv("VHM&PP ap_exp.csv", header = TRUE)
+dataDUELS <- read.csv(file = "DUELS results.csv", head=TRUE, na.strings=c("."))
 dataxDUELS <- read.csv(file = "DUELS ap_exp.csv", head=TRUE, sep=";", na.strings=c("."))
 
 
 #read in HR and CI for 18 ESCAPE cohorts not including VHM&PP cohort
-dataESC<- read.csv("ESCAPE logHR se without VHM&PP.csv ", header = T)
+dataESC<- read.csv("ESCAPE logHR se without VHM&PP.csv", header = TRUE)
 
 #read in HR and CI for other cohorts
-dataREST<- read.csv("HR CI Rest of World.csv ", header = T)
+dataREST<- read.csv("HR CI Rest of World.csv", header = TRUE)
 
 #calculate logHR and standard error based on 5th to 95th PM2.5 percentiles
 logrESC=dataESC[,2]
@@ -80,8 +80,8 @@ beta=dataDUELS[a:e,3]
 se=dataDUELS[a:e,4]
 tau=dataDUELS[a:e,5]
 #ll=-dataDUELS[a:e,6]/2
-f=as.character(dataDUELS[a:e,9])
-weight=dataDUELS[a:e, 7]
+f=as.character(dataDUELS[a:e,7])
+weight=dataDUELS[a:e, 6]
 output=cbind(f, weight, mu, tau, beta, se)
 out=subset(output, weight>0)
 f=out[,1]
@@ -107,7 +107,7 @@ varb=matrix(0,nx,nf)
 upcl<-matrix(0, nx, 1)
 lowcl<-matrix(0, nx, 1)
 for (i in 1:nx) {
-for (k in 1:nf) {
+if (nf >= 1) for (k in 1:nf) {
 if (f[k]== "z*logit"){
     		T[i,k]<-x[i]/(1+exp(-(x[i]-mu[k])/(tau[k]*r)))
   	}
@@ -116,7 +116,7 @@ if (f[k]== "z*logit"){
   	}
 }}
 for (i in 1:nx) {rmean[i]=(T[i,]*beta)%*%wt}
-for (k in 1:nf) { for (i in 1:nx) {
+if (nf >= 1) for (k in 1:nf) { for (i in 1:nx) {
 var[i,k]=(T[i,k]*se[k])^2 + (T[i,k]*beta[k]-rmean[i])^2 
 varw[i,k]=(T[i,k]*se[k])^2 
 varb[i,k]=(T[i,k]*beta[k]-rmean[i])^2 }} 
@@ -147,8 +147,8 @@ beta=dataCTS[a:e,3]
 se=dataCTS[a:e,4]
 tau=dataCTS[a:e,5]
 #ll=-dataCTS[a:e,6]/2
-f=as.character(dataCTS[a:e,9])
-weight=dataCTS[a:e, 7]
+f=as.character(dataCTS[a:e,7])
+weight=dataCTS[a:e, 6]
 output=cbind(f, weight, mu, tau, beta, se)
 out=subset(output, weight>0)
 f=out[,1]
@@ -174,7 +174,7 @@ varb=matrix(0,nx,nf)
 upcl<-matrix(0, nx, 1)
 lowcl<-matrix(0, nx, 1)
 for (i in 1:nx) {
-for (k in 1:nf) {
+if (nf >= 1) for (k in 1:nf) {
 if (f[k]== "z*logit"){
     		T[i,k]<-x[i]/(1+exp(-(x[i]-mu[k])/(tau[k]*r)))
   	}
@@ -183,7 +183,7 @@ if (f[k]== "z*logit"){
   	}
 }}
 for (i in 1:nx) {rmean[i]=(T[i,]*beta)%*%wt}
-for (k in 1:nf) { for (i in 1:nx) {
+if (nf >= 1) for (k in 1:nf) { for (i in 1:nx) {
 var[i,k]=(T[i,k]*se[k])^2 + (T[i,k]*beta[k]-rmean[i])^2 
 varw[i,k]=(T[i,k]*se[k])^2 
 varb[i,k]=(T[i,k]*beta[k]-rmean[i])^2 }} 
@@ -216,8 +216,8 @@ beta=dataVHM[a:e,3]
 se=dataVHM[a:e,4]
 tau=dataVHM[a:e,5]
 #ll=-dataVHM[a:e,6]/2
-f=as.character(dataVHM[a:e,9])
-weight=dataVHM[a:e, 7]
+f=as.character(dataVHM[a:e,7])
+weight=dataVHM[a:e, 6]
 output=cbind(f, weight, mu, tau, beta, se)
 out=subset(output, weight>0)
 f=out[,1]
@@ -243,7 +243,7 @@ varb=matrix(0,nx,nf)
 upcl<-matrix(0, nx, 1)
 lowcl<-matrix(0, nx, 1)
 for (i in 1:nx) {
-for (k in 1:nf) {
+if (nf >= 1) for (k in 1:nf) {
 if (f[k]== "z*logit"){
     		T[i,k]<-x[i]/(1+exp(-(x[i]-mu[k])/(tau[k]*r)))
   	}
@@ -252,7 +252,7 @@ if (f[k]== "z*logit"){
   	}
 }}
 for (i in 1:nx) {rmean[i]=(T[i,]*beta)%*%wt}
-for (k in 1:nf) { for (i in 1:nx) {
+if (nf >= 1) for (k in 1:nf) { for (i in 1:nx) {
 var[i,k]=(T[i,k]*se[k])^2 + (T[i,k]*beta[k]-rmean[i])^2 
 varw[i,k]=(T[i,k]*se[k])^2 
 varb[i,k]=(T[i,k]*beta[k]-rmean[i])^2 }} 
@@ -284,8 +284,8 @@ beta=dataBreast[a:e,3]
 se=dataBreast[a:e,4]
 tau=dataBreast[a:e,5]
 #ll=-dataBreast[a:e,6]/2
-f=as.character(dataBreast[a:e,9])
-weight=dataBreast[a:e, 7]
+f=as.character(dataBreast[a:e,7])
+weight=dataBreast[a:e, 6]
 output=cbind(f, weight, mu, tau, beta, se)
 out=subset(output, weight>0)
 f=out[,1]
@@ -311,7 +311,7 @@ varb=matrix(0,nx,nf)
 upcl<-matrix(0, nx, 1)
 lowcl<-matrix(0, nx, 1)
 for (i in 1:nx) {
-for (k in 1:nf) {
+if (nf >= 1) for (k in 1:nf) {
 if (f[k]== "z*logit"){
     		T[i,k]<-x[i]/(1+exp(-(x[i]-mu[k])/(tau[k]*r)))
   	}
@@ -320,7 +320,7 @@ if (f[k]== "z*logit"){
   	}
 }}
 for (i in 1:nx) {rmean[i]=(T[i,]*beta)%*%wt}
-for (k in 1:nf) { for (i in 1:nx) {
+if (nf >= 1) for (k in 1:nf) { for (i in 1:nx) {
 var[i,k]=(T[i,k]*se[k])^2 + (T[i,k]*beta[k]-rmean[i])^2 
 varw[i,k]=(T[i,k]*se[k])^2 
 varb[i,k]=(T[i,k]*beta[k]-rmean[i])^2 }} 
@@ -351,8 +351,8 @@ beta=dataCanCHEC1991[a:e,3]
 se=dataCanCHEC1991[a:e,4]
 tau=dataCanCHEC1991[a:e,5]
 ll=-dataCanCHEC1991[a:e,6]/2
-f=as.character(dataCanCHEC1991[a:e,9])
-weight=dataCanCHEC1991[a:e, 7]
+f=as.character(dataCanCHEC1991[a:e,7])
+weight=dataCanCHEC1991[a:e, 6]
 output=cbind(f, ll, weight, mu, tau, beta, se)
 out=subset(output, weight>0)
 f=out[,1]
@@ -378,7 +378,7 @@ varb=matrix(0,nx,nf)
 upcl<-matrix(0, nx, 1)
 lowcl<-matrix(0, nx, 1)
 for (i in 1:nx) {
-for (k in 1:nf) {
+if (nf >= 1) for (k in 1:nf) {
 if (f[k]== "z*logit"){
     		T[i,k]<-x[i]/(1+exp(-(x[i]-mu[k])/(tau[k]*r)))
   	}
@@ -387,7 +387,7 @@ if (f[k]== "z*logit"){
   	}
 }}
 for (i in 1:nx) {rmean[i]=(T[i,]*beta)%*%wt}
-for (k in 1:nf) { for (i in 1:nx) {
+if (nf >= 1) for (k in 1:nf) { for (i in 1:nx) {
 var[i,k]=(T[i,k]*se[k])^2 + (T[i,k]*beta[k]-rmean[i])^2 
 varw[i,k]=(T[i,k]*se[k])^2 
 varb[i,k]=(T[i,k]*beta[k]-rmean[i])^2 }} 
@@ -420,8 +420,8 @@ beta=dataCanCHEC2001[a:e,3]
 se=dataCanCHEC2001[a:e,4]
 tau=dataCanCHEC2001[a:e,5]
 ll=-dataCanCHEC2001[a:e,6]/2
-f=as.character(dataCanCHEC2001[a:e,9])
-weight=dataCanCHEC2001[a:e, 7]
+f=as.character(dataCanCHEC2001[a:e,7])
+weight=dataCanCHEC2001[a:e, 6]
 output=cbind(f, ll, weight, mu, tau, beta, se)
 out=subset(output, weight>0)
 f=out[,1]
@@ -447,7 +447,7 @@ varb=matrix(0,nx,nf)
 upcl<-matrix(0, nx, 1)
 lowcl<-matrix(0, nx, 1)
 for (i in 1:nx) {
-for (k in 1:nf) {
+if (nf >= 1) for (k in 1:nf) {
 if (f[k]== "z*logit"){
     		T[i,k]<-x[i]/(1+exp(-(x[i]-mu[k])/(tau[k]*r)))
   	}
@@ -456,7 +456,7 @@ if (f[k]== "z*logit"){
   	}
 }}
 for (i in 1:nx) {rmean[i]=(T[i,]*beta)%*%wt}
-for (k in 1:nf) { for (i in 1:nx) {
+if (nf >= 1) for (k in 1:nf) { for (i in 1:nx) {
 var[i,k]=(T[i,k]*se[k])^2 + (T[i,k]*beta[k]-rmean[i])^2 
 varw[i,k]=(T[i,k]*se[k])^2 
 varb[i,k]=(T[i,k]*beta[k]-rmean[i])^2 }} 
@@ -483,13 +483,13 @@ nx=length(x)
 r=max(x)-min(x)
 a=1
 e=21
-mu=dataAARP[a:e,4]
-beta=dataAARP[a:e,6]
-se=dataAARP[a:e,7]
-tau=dataAARP[a:e,5]
-ll=-dataAARP[a:e,8]/2
-f=as.character(dataAARP[a:e,2])
-weight=dataAARP[a:e, 9]
+mu=dataAARP[a:e,3]
+beta=dataAARP[a:e,5]
+se=dataAARP[a:e,6]
+tau=dataAARP[a:e,4]
+ll=-dataAARP[a:e,7]/2
+f=as.character(dataAARP[a:e,1])
+weight=dataAARP[a:e, 7]
 output=cbind(f, ll, weight, mu, tau, beta, se)
 out=subset(output, weight>0)
 f=out[,1]
@@ -513,7 +513,7 @@ varb=matrix(0,nx,nf)
 upcl<-matrix(0, nx, 1)
 lowcl<-matrix(0, nx, 1)
 for (i in 1:nx) {
-for (k in 1:nf) {
+if (nf >= 1) for (k in 1:nf) {
 if (f[k]== "linear"){
     		T[i,k]<-x[i]/(1+exp(-(x[i]-mu[k])/(tau[k]*r)))
   	}
@@ -522,7 +522,7 @@ if (f[k]== "linear"){
   	}
 }}
 for (i in 1:nx) {rmean[i]=(T[i,]*beta)%*%wt}
-for (k in 1:nf) { for (i in 1:nx) {
+if (nf >= 1) for (k in 1:nf) { for (i in 1:nx) {
 var[i,k]=(T[i,k]*se[k])^2 + (T[i,k]*beta[k]-rmean[i])^2 
 varw[i,k]=(T[i,k]*se[k])^2 
 varb[i,k]=(T[i,k]*beta[k]-rmean[i])^2 }} 
@@ -554,8 +554,8 @@ beta=dataCCHS[a:e,3]
 se=dataCCHS[a:e,4]
 tau=dataCCHS[a:e,5]
 ll=-dataCCHS[a:e,6]/2
-f=as.character(dataCCHS[a:e,9])
-weight=dataCCHS[a:e, 7]
+f=as.character(dataCCHS[a:e,7])
+weight=dataCCHS[a:e, 6]
 output=cbind(f, ll, weight, mu, tau, beta, se)
 out=subset(output, weight>0)
 f=out[,1]
@@ -581,7 +581,7 @@ varb=matrix(0,nx,nf)
 upcl<-matrix(0, nx, 1)
 lowcl<-matrix(0, nx, 1)
 for (i in 1:nx) {
-for (k in 1:nf) {
+if (nf >= 1) for (k in 1:nf) {
 if (f[k]== "z*logit"){
     		T[i,k]<-x[i]/(1+exp(-(x[i]-mu[k])/(tau[k]*r)))
   	}
@@ -590,7 +590,7 @@ if (f[k]== "z*logit"){
   	}
 }}
 for (i in 1:nx) {rmean[i]=(T[i,]*beta)%*%wt}
-for (k in 1:nf) { for (i in 1:nx) {
+if (nf >= 1) for (k in 1:nf) { for (i in 1:nx) {
 var[i,k]=(T[i,k]*se[k])^2 + (T[i,k]*beta[k]-rmean[i])^2 
 varw[i,k]=(T[i,k]*se[k])^2 
 varb[i,k]=(T[i,k]*beta[k]-rmean[i])^2 }} 
@@ -618,13 +618,13 @@ nx=length(x)
 r=max(x)-min(x)
 a=1
 e=19
-mu=dataUK[a:e,4]
-beta=dataUK[a:e,6]
-se=dataUK[a:e,7]
-tau=dataUK[a:e,5]
-ll=-dataUK[a:e,8]/2
-f=as.character(dataUK[a:e,2])
-weight=dataUK[a:e, 9]
+mu=dataUK[a:e,3]
+beta=dataUK[a:e,5]
+se=dataUK[a:e,6]
+tau=dataUK[a:e,4]
+ll=-dataUK[a:e,7]/2
+f=as.character(dataUK[a:e,1])
+weight=dataUK[a:e, 7]
 output=cbind(f, ll, weight, mu, tau, beta, se)
 out=subset(output, weight>0)
 f=out[,1]
@@ -648,7 +648,7 @@ varb=matrix(0,nx,nf)
 upcl<-matrix(0, nx, 1)
 lowcl<-matrix(0, nx, 1)
 for (i in 1:nx) {
-for (k in 1:nf) {
+if (nf >= 1) for (k in 1:nf) {
 if (f[k]== "linear"){
     		T[i,k]<-x[i]/(1+exp(-(x[i]-mu[k])/(tau[k]*r)))
   	}
@@ -657,7 +657,7 @@ if (f[k]== "linear"){
   	}
 }}
 for (i in 1:nx) {rmean[i]=(T[i,]*beta)%*%wt}
-for (k in 1:nf) { for (i in 1:nx) {
+if (nf >= 1) for (k in 1:nf) { for (i in 1:nx) {
 var[i,k]=(T[i,k]*se[k])^2 + (T[i,k]*beta[k]-rmean[i])^2 
 varw[i,k]=(T[i,k]*se[k])^2 
 varb[i,k]=(T[i,k]*beta[k]-rmean[i])^2 }} 
@@ -689,8 +689,8 @@ beta=dataHK[a:e,3]
 se=dataHK[a:e,4]
 tau=dataHK[a:e,5]
 ll=-dataHK[a:e,6]/2
-f=as.character(dataHK[a:e,9])
-weight=dataHK[a:e, 7]
+f=as.character(dataHK[a:e,7])
+weight=dataHK[a:e, 6]
 output=cbind(f, ll, weight, mu, tau, beta, se)
 out=subset(output, weight>0)
 f=out[,1]
@@ -716,7 +716,7 @@ varb=matrix(0,nx,nf)
 upcl<-matrix(0, nx, 1)
 lowcl<-matrix(0, nx, 1)
 for (i in 1:nx) {
-for (k in 1:nf) {
+if (nf >= 1) for (k in 1:nf) {
 if (f[k]== "z*logit"){
     		T[i,k]<-x[i]/(1+exp(-(x[i]-mu[k])/(tau[k]*r)))
   	}
@@ -725,7 +725,7 @@ if (f[k]== "z*logit"){
   	}
 }}
 for (i in 1:nx) {rmean[i]=(T[i,]*beta)%*%wt}
-for (k in 1:nf) { for (i in 1:nx) {
+if (nf >= 1) for (k in 1:nf) { for (i in 1:nx) {
 var[i,k]=(T[i,k]*se[k])^2 + (T[i,k]*beta[k]-rmean[i])^2 
 varw[i,k]=(T[i,k]*se[k])^2 
 varb[i,k]=(T[i,k]*beta[k]-rmean[i])^2 }} 
@@ -758,8 +758,8 @@ beta=dataACS[a:e,3]
 se=dataACS[a:e,4]
 tau=dataACS[a:e,5]
 ll=-dataACS[a:e,6]/2
-f=as.character(dataACS[a:e,9])
-weight=dataACS[a:e, 7]
+f=as.character(dataACS[a:e,7])
+weight=dataACS[a:e, 6]
 output=cbind(f, ll, weight, mu, tau, beta, se)
 out=subset(output, weight>0)
 f=out[,1]
@@ -785,7 +785,7 @@ varb=matrix(0,nx,nf)
 upcl<-matrix(0, nx, 1)
 lowcl<-matrix(0, nx, 1)
 for (i in 1:nx) {
-for (k in 1:nf) {
+if (nf >= 1) for (k in 1:nf) {
 if (f[k]== "z*logit"){
     		T[i,k]<-x[i]/(1+exp(-(x[i]-mu[k])/(tau[k]*r)))
   	}
@@ -794,7 +794,7 @@ if (f[k]== "z*logit"){
   	}
 }}
 for (i in 1:nx) {rmean[i]=(T[i,]*beta)%*%wt}
-for (k in 1:nf) { for (i in 1:nx) {
+if (nf >= 1) for (k in 1:nf) { for (i in 1:nx) {
 var[i,k]=(T[i,k]*se[k])^2 + (T[i,k]*beta[k]-rmean[i])^2 
 varw[i,k]=(T[i,k]*se[k])^2 
 varb[i,k]=(T[i,k]*beta[k]-rmean[i])^2 }} 
@@ -825,8 +825,8 @@ beta=dataChinaH[a:e,3]
 se=dataChinaH[a:e,4]
 tau=dataChinaH[a:e,5]
 ll=-dataChinaH[a:e,6]/2
-f=as.character(dataChinaH[a:e,9])
-weight=dataChinaH[a:e, 7]
+f=as.character(dataChinaH[a:e,7])
+weight=dataChinaH[a:e, 6]
 output=cbind(f, ll, weight, mu, tau, beta, se)
 out=subset(output, weight>0)
 f=out[,1]
@@ -852,7 +852,7 @@ varb=matrix(0,nx,nf)
 upcl<-matrix(0, nx, 1)
 lowcl<-matrix(0, nx, 1)
 for (i in 1:nx) {
-for (k in 1:nf) {
+if (nf >= 1) for (k in 1:nf) {
 if (f[k]== "z*logit"){
     		T[i,k]<-x[i]/(1+exp(-(x[i]-mu[k])/(tau[k]*r)))
   	}
@@ -861,7 +861,7 @@ if (f[k]== "z*logit"){
   	}
 }}
 for (i in 1:nx) {rmean[i]=(T[i,]*beta)%*%wt}
-for (k in 1:nf) { for (i in 1:nx) {
+if (nf >= 1) for (k in 1:nf) { for (i in 1:nx) {
 var[i,k]=(T[i,k]*se[k])^2 + (T[i,k]*beta[k]-rmean[i])^2 
 varw[i,k]=(T[i,k]*se[k])^2 
 varb[i,k]=(T[i,k]*beta[k]-rmean[i])^2 }} 
@@ -886,8 +886,8 @@ beta=dataChinaL[a:e,3]
 se=dataChinaL[a:e,4]
 tau=dataChinaL[a:e,5]
 ll=-dataChinaL[a:e,6]/2
-f=as.character(dataChinaL[a:e,9])
-weight=dataChinaL[a:e, 7]
+f=as.character(dataChinaL[a:e,7])
+weight=dataChinaL[a:e, 6]
 output=cbind(f, ll, weight, mu, tau, beta, se)
 out=subset(output, weight>0)
 f=out[,1]
@@ -913,7 +913,7 @@ varb=matrix(0,nx,nf)
 upcl<-matrix(0, nx, 1)
 lowcl<-matrix(0, nx, 1)
 for (i in 1:nx) {
-for (k in 1:nf) {
+if (nf >= 1) for (k in 1:nf) {
 if (f[k]== "z*logit"){
     		T[i,k]<-x[i]/(1+exp(-(x[i]-mu[k])/(tau[k]*r)))
   	}
@@ -922,7 +922,7 @@ if (f[k]== "z*logit"){
   	}
 }}
 for (i in 1:nx) {rmean[i]=(T[i,]*beta)%*%wt}
-for (k in 1:nf) { for (i in 1:nx) {
+if (nf >= 1) for (k in 1:nf) { for (i in 1:nx) {
 var[i,k]=(T[i,k]*se[k])^2 + (T[i,k]*beta[k]-rmean[i])^2 
 varw[i,k]=(T[i,k]*se[k])^2 
 varb[i,k]=(T[i,k]*beta[k]-rmean[i])^2 }} 
@@ -962,8 +962,8 @@ beta=dataNHS[a:e,3]
 se=dataNHS[a:e,4]
 tau=dataNHS[a:e,5]
 ll=-dataNHS[a:e,6]/2
-f=as.character(dataNHS[a:e,9])
-weight=dataNHS[a:e, 7]
+f=as.character(dataNHS[a:e,7])
+weight=dataNHS[a:e, 6]
 output=cbind(f, ll, weight, mu, tau, beta, se)
 out=subset(output, weight>0)
 f=out[,1]
@@ -989,7 +989,7 @@ varb=matrix(0,nx,nf)
 upcl<-matrix(0, nx, 1)
 lowcl<-matrix(0, nx, 1)
 for (i in 1:nx) {
-for (k in 1:nf) {
+if (nf >= 1) for (k in 1:nf) {
 if (f[k]== "z*logit"){
     		T[i,k]<-x[i]/(1+exp(-(x[i]-mu[k])/(tau[k]*r)))
   	}
@@ -998,7 +998,7 @@ if (f[k]== "z*logit"){
   	}
 }}
 for (i in 1:nx) {rmean[i]=(T[i,]*beta)%*%wt}
-for (k in 1:nf) { for (i in 1:nx) {
+if (nf >= 1) for (k in 1:nf) { for (i in 1:nx) {
 var[i,k]=(T[i,k]*se[k])^2 + (T[i,k]*beta[k]-rmean[i])^2 
 varw[i,k]=(T[i,k]*se[k])^2 
 varb[i,k]=(T[i,k]*beta[k]-rmean[i])^2 }} 
@@ -1029,8 +1029,8 @@ beta=dataNHIS[a:e,3]
 se=dataNHIS[a:e,4]
 tau=dataNHIS[a:e,5]
 ll=-dataNHIS[a:e,6]/2
-f=as.character(dataNHIS[a:e,9])
-weight=dataNHIS[a:e, 7]
+f=as.character(dataNHIS[a:e,7])
+weight=dataNHIS[a:e, 6]
 output=cbind(f, ll, weight, mu, tau, beta, se)
 out=subset(output, weight>0)
 f=out[,1]
@@ -1056,7 +1056,7 @@ varb=matrix(0,nx,nf)
 upcl<-matrix(0, nx, 1)
 lowcl<-matrix(0, nx, 1)
 for (i in 1:nx) {
-for (k in 1:nf) {
+if (nf >= 1) for (k in 1:nf) {
 if (f[k]== "z*logit"){
     		T[i,k]<-x[i]/(1+exp(-(x[i]-mu[k])/(tau[k]*r)))
   	}
@@ -1065,7 +1065,7 @@ if (f[k]== "z*logit"){
   	}
 }}
 for (i in 1:nx) {rmean[i]=(T[i,]*beta)%*%wt}
-for (k in 1:nf) { for (i in 1:nx) {
+if (nf >= 1) for (k in 1:nf) { for (i in 1:nx) {
 var[i,k]=(T[i,k]*se[k])^2 + (T[i,k]*beta[k]-rmean[i])^2 
 varw[i,k]=(T[i,k]*se[k])^2 
 varb[i,k]=(T[i,k]*beta[k]-rmean[i])^2 }} 
@@ -1093,13 +1093,13 @@ nx=length(x)
 r=max(x)-min(x)
 a=1
 e=18
-mu=dataRome[a:e,4]
-beta=dataRome[a:e,6]
-se=dataRome[a:e,7]
-tau=dataRome[a:e,5]
-ll=-dataRome[a:e,8]/2
-f=as.character(dataRome[a:e,2])
-weight=dataRome[a:e, 9]
+mu=dataRome[a:e,3]
+beta=dataRome[a:e,5]
+se=dataRome[a:e,6]
+tau=dataRome[a:e,4]
+ll=-dataRome[a:e,7]/2
+f=as.character(dataRome[a:e,1])
+weight=dataRome[a:e, 7]
 output=cbind(f, ll, weight, mu, tau, beta, se)
 out=subset(output, weight>0)
 f=out[,1]
@@ -1123,7 +1123,7 @@ varb=matrix(0,nx,nf)
 upcl<-matrix(0, nx, 1)
 lowcl<-matrix(0, nx, 1)
 for (i in 1:nx) {
-for (k in 1:nf) {
+if (nf >= 1) for (k in 1:nf) {
 if (f[k]== "linear"){
     		T[i,k]<-x[i]/(1+exp(-(x[i]-mu[k])/(tau[k]*r)))
   	}
@@ -1132,7 +1132,7 @@ if (f[k]== "linear"){
   	}
 }}
 for (i in 1:nx) {rmean[i]=(T[i,]*beta)%*%wt}
-for (k in 1:nf) { for (i in 1:nx) {
+if (nf >= 1) for (k in 1:nf) { for (i in 1:nx) {
 var[i,k]=(T[i,k]*se[k])^2 + (T[i,k]*beta[k]-rmean[i])^2 
 varw[i,k]=(T[i,k]*se[k])^2 
 varb[i,k]=(T[i,k]*beta[k]-rmean[i])^2 }} 
@@ -1324,7 +1324,7 @@ for (i in 1:length(m)) {
 j=j+1
 diff=log(numt/a[k]+1)/(1+exp(-(numt-m[i])/(0.6*r))) - log(dent/a[k]+1)/(1+exp(-(dent-m[i])/(0.6*r)))
 fit=rma.mv(yi=logr, V=Vall, mods=~diff  -1, random=list( ~ 1 | study), method="REML", intercept=FALSE,
- struct="CS")
+ struct="CS", verbose=TRUE)
 aic6[j]=AIC(fit)
 b6[j]=coef(fit)
 model.form6[j]<- a[k]
